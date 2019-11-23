@@ -51,7 +51,7 @@ def save_label():
 
 @app.route("/stats")
 @cross_origin()
-def save_label():
+def get_stats():
     tweets = read_all_tweets()
     all_tweets_count = tweets.shape[0]
     labelled_tweets_count = tweets[tweets.apply(lambda x: x.label != 'NONE', axis=1)].shape[0]
