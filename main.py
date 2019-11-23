@@ -30,13 +30,10 @@ def get_unlabelled_tweet():
     tweets = read_all_tweets()
     arr = [(it[0], it[1]) for it in tweets[tweets.label == 'NONE'].to_numpy()]
     shuffle(arr)
-    response_body = json.dumps(
-        {
-            'id': arr[0][0],
-            'tweet': arr[0][1]
-        }
-    )
-    return response_body
+    return json.dumps({
+        'id': arr[0][0],
+        'tweet': arr[0][1]
+    })
 
 
 @app.route("/save_label", methods=['PUT'])
@@ -50,6 +47,18 @@ def save_label():
     tweets.xs(row_id)['label'] = label
     update_all_tweets(tweets)
     return '{}'
+
+
+@app.route("/stats")
+@cross_origin()
+def save_label():
+    tweets = read_all_tweets()
+    all_tweets_count = tweets.shape[0]
+    labelled_tweets_count = tweets[tweets.apply(lambda x: x.label != 'NONE', axis=1)].shape[0]
+    return json.dumps({
+        'all_tweets_count': all_tweets_count,
+        'labelled_tweets_count': labelled_tweets_count
+    })
 
 
 if __name__ == "__main__":
