@@ -25,7 +25,7 @@ def get_df_id_by_tweet_id(df, tweet_id):
 
 
 def group_by_counts(df):
-    values = list(df['label'].to_numpy().T[0])
+    values = list(df['label'].to_numpy().T)
     unique = set(values)
     dic = {}
     for it in unique:
