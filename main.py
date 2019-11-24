@@ -24,6 +24,15 @@ def get_df_id_by_tweet_id(df, tweet_id):
     return df[df['tweet_id'] == tweet_id].index.tolist()[0]
 
 
+def group_by_counts(df):
+    values = list(df['label'].to_numpy().T[0])
+    unique = set(values)
+    dic = {}
+    for it in unique:
+        dic[it] = values.count(it)
+    return dic
+
+
 @app.route("/get_unlabelled_tweet")
 @cross_origin()
 def get_unlabelled_tweet():
@@ -59,6 +68,13 @@ def get_stats():
         'all_tweets_count': all_tweets_count,
         'labelled_tweets_count': labelled_tweets_count
     })
+
+
+@app.route("/stats_detailed")
+@cross_origin()
+def get_stats_detailed():
+    tweets = read_all_tweets()
+    return json.dumps(group_by_counts(tweets))
 
 
 if __name__ == "__main__":
