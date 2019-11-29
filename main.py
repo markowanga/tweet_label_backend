@@ -60,7 +60,6 @@ def save_label():
     tweets.xs(row_id)['username'] = username
     tweets.xs(row_id)['note'] = note
     tweets.xs(row_id)['update_time'] = datetime.datetime.now()
-    print(tweets.iloc(row_id))
     update_all_tweets(tweets)
     return '', 204
 
