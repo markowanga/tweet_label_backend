@@ -18,7 +18,6 @@ def read_all_tweets():
 
 def update_all_tweets(df):
     df.to_json(TWEETS_FILE)
-    pass
 
 
 def get_df_id_by_tweet_id(df, tweet_id):
@@ -61,6 +60,7 @@ def save_label():
     tweets.xs(row_id)['username'] = username
     tweets.xs(row_id)['note'] = note
     tweets.xs(row_id)['update_time'] = datetime.datetime.now()
+    print(tweets.iloc(row_id))
     update_all_tweets(tweets)
     return '', 204
 
