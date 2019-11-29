@@ -3,6 +3,7 @@ import pandas as pd
 from random import shuffle
 from flask_cors import CORS, cross_origin
 import json
+import datetime
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -59,6 +60,7 @@ def save_label():
     tweets.xs(row_id)['label'] = label
     tweets.xs(row_id)['username'] = username
     tweets.xs(row_id)['note'] = note
+    tweets.xs(row_id)['update_time'] = datetime.datetime.now()
     update_all_tweets(tweets)
     return '', 204
 

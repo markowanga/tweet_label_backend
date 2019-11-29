@@ -36,12 +36,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ci" />
-      <recent name="$PROJECT_DIR$/data" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/ci" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ci" />
       <recent name="$PROJECT_DIR$/data" />
     </key>
@@ -105,7 +105,7 @@
       <workItem from="1574658577104" duration="2129000" />
       <workItem from="1574695421983" duration="503000" />
       <workItem from="1574774848283" duration="5178000" />
-      <workItem from="1574963927397" duration="4940000" />
+      <workItem from="1574963927397" duration="5762000" />
     </task>
     <servers />
   </component>
