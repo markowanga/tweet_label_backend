@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   tweet_label_backend:
-    build: ~/projects/tweet_label_backend/
+    build: ~/projects/tweet_label/backend/
     container_name: tweet_label_backend
     volumes:
       - /home/marcinwatroba/projects/tweet_label/tweet_data:/data
