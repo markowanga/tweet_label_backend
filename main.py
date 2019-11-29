@@ -67,7 +67,7 @@ def save_label():
 def get_stats():
     tweets = read_all_tweets()
     all_tweets_count = tweets.shape[0]
-    labelled_tweets_count = tweets[tweets.apply(lambda x: x.label != 'NONE', axis=1)].shape[0]
+    labelled_tweets_count = tweets[tweets.apply(lambda x: x.label != '', axis=1)].shape[0]
     return json.dumps({
         'all_tweets_count': all_tweets_count,
         'labelled_tweets_count': labelled_tweets_count
