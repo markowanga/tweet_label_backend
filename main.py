@@ -20,10 +20,6 @@ def update_all_tweets(df):
     df.to_json(TWEETS_FILE)
 
 
-def get_df_id_by_tweet_id(df, tweet_id):
-    return df[df['tweet_id'] == tweet_id].index.tolist()[0]
-
-
 def group_by_counts(df):
     values = list(df['label'].to_numpy().T)
     unique = set(values)
@@ -54,13 +50,14 @@ def save_label():
     label = request_body['label']
     username = request_body['username']
     note = request_body['note']
+
     tweets = read_all_tweets()
-    row_id = get_df_id_by_tweet_id(tweets, tweet_id)
-    tweets.xs(row_id)['label'] = label
-    tweets.xs(row_id)['username'] = username
-    tweets.xs(row_id)['note'] = note
-    tweets.xs(row_id)['update_time'] = datetime.datetime.now()
+    tweets.loc[tweets.tweet_id == tweet_id, 'label'] = label
+    tweets.loc[tweets.tweet_id == tweet_id, 'username'] = username
+    tweets.loc[tweets.tweet_id == tweet_id, 'note'] = note
+    tweets.loc[tweets.tweet_id == tweet_id, 'update_time'] = datetime.datetime.now()
     update_all_tweets(tweets)
+
     return '', 204
 
 
