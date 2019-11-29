@@ -37,6 +37,7 @@ def group_by_counts(df):
 @cross_origin()
 def get_unlabelled_tweet():
     tweets = read_all_tweets()
+    print(tweets.iloc(0))
     arr = [(it[0], it[1]) for it in tweets[tweets.label == ''].to_numpy()]
     shuffle(arr)
     return json.dumps({
