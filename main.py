@@ -51,7 +51,7 @@ def save_label():
     request_body = request.get_json()
     tweet_id = request_body['tweet_id']
     label = request_body['label']
-    username = request_body['user_name']
+    username = request_body['username']
     tweets = read_all_tweets()
     row_id = get_df_id_by_tweet_id(tweets, tweet_id)
     tweets.xs(row_id)['label'] = label
