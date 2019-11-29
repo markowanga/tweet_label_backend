@@ -50,14 +50,12 @@ def save_label():
     label = request_body['label']
     username = request_body['username']
     note = request_body['note']
-
     tweets = read_all_tweets()
     tweets.loc[tweets.tweet_id == tweet_id, 'label'] = label
     tweets.loc[tweets.tweet_id == tweet_id, 'username'] = username
     tweets.loc[tweets.tweet_id == tweet_id, 'note'] = note
     tweets.loc[tweets.tweet_id == tweet_id, 'update_time'] = datetime.datetime.now()
     update_all_tweets(tweets)
-
     return '', 204
 
 
