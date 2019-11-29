@@ -5,8 +5,8 @@ from flask_cors import CORS, cross_origin
 import json
 
 app = Flask(__name__)
-cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app)
 
 TWEETS_FILE = "data/data.json"
 
@@ -51,11 +51,13 @@ def save_label():
     request_body = request.get_json()
     tweet_id = request_body['tweet_id']
     label = request_body['label']
+    username = request_body['user_name']
     tweets = read_all_tweets()
     row_id = get_df_id_by_tweet_id(tweets, tweet_id)
     tweets.xs(row_id)['label'] = label
+    tweets.xs(row_id)['username'] = username
     update_all_tweets(tweets)
-    return '{}'
+    return '', 204
 
 
 @app.route("/stats")
