@@ -52,10 +52,12 @@ def save_label():
     tweet_id = request_body['tweet_id']
     label = request_body['label']
     username = request_body['username']
+    note = request_body['note']
     tweets = read_all_tweets()
     row_id = get_df_id_by_tweet_id(tweets, tweet_id)
     tweets.xs(row_id)['label'] = label
     tweets.xs(row_id)['username'] = username
+    tweets.xs(row_id)['note'] = note
     update_all_tweets(tweets)
     return '', 204
 

@@ -28,8 +28,8 @@ pipeline {
                                                 sshTransfer(
                                                         sourceFiles: "ci/**/*",
                                                         removePrefix: "ci/",
-                                                        remoteDirectory: 'projects/tweet_label_backend',
-                                                        execCommand: "bash projects/tweet_label_backend/deploy.sh"
+                                                        remoteDirectory: 'projects/tweet_label/backend',
+                                                        execCommand: "bash projects/tweet_label/backend/deploy.sh"
                                                 )
                                         ]
                                 )
