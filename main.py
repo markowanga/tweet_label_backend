@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import pandas as pd
 from random import shuffle
 from flask_cors import CORS, cross_origin
-import json
 import datetime
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -88,6 +89,16 @@ def get_labelled_tweets():
         d['update_time'] = d['update_time'].isoformat()
         list_to_return.append(d)
     return jsonify({'tweets': list_to_return})
+
+
+@app.route('/stats_heatmap')
+def get_stats_heatmap():
+    flights = read_all_tweets()
+    flights = pd.pivot_table(flights, values='tweet_id', index=['label'],  columns=['username'], aggfunc=len)
+    fig, ax = plt.subplots(figsize=(6, 3))
+    sns.heatmap(flights, annot=True, fmt=".0f")
+    fig.savefig('output.png')
+    return send_file("output.png", mimetype='image/gif')
 
 
 if __name__ == "__main__":
