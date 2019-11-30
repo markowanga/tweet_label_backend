@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import pandas as pd
 from random import shuffle
 from flask_cors import CORS, cross_origin
@@ -29,14 +29,13 @@ def group_by_counts(df):
     return dic
 
 
-@app.route("/get_unlabelled_tweet")
+@app.route("/get_unlabelled_tweet", methods=['GET'])
 @cross_origin()
 def get_unlabelled_tweet():
     tweets = read_all_tweets()
-    print(tweets.iloc(0))
     arr = [(it[0], it[1]) for it in tweets[tweets.label == ''].to_numpy()]
     shuffle(arr)
-    return json.dumps({
+    return jsonify({
         'id': arr[0][0],
         'tweet': arr[0][1]
     })
@@ -59,23 +58,36 @@ def save_label():
     return '', 204
 
 
-@app.route("/stats")
+@app.route("/stats", methods=['GET'])
 @cross_origin()
 def get_stats():
     tweets = read_all_tweets()
     all_tweets_count = tweets.shape[0]
     labelled_tweets_count = tweets[tweets.apply(lambda x: x.label != '', axis=1)].shape[0]
-    return json.dumps({
+    return jsonify({
         'all_tweets_count': all_tweets_count,
         'labelled_tweets_count': labelled_tweets_count
     })
 
 
-@app.route("/stats_detailed")
+@app.route("/stats_detailed", methods=['GET'])
 @cross_origin()
 def get_stats_detailed():
     tweets = read_all_tweets()
-    return json.dumps(group_by_counts(tweets))
+    return jsonify(group_by_counts(tweets))
+
+
+@app.route("/labelled_tweets", methods=['GET'])
+@cross_origin()
+def get_labelled_tweets():
+    tweets = read_all_tweets()
+    tweets = tweets[tweets.label != ''].sort_values(by=['update_time'], ascending=False)
+    list_to_return = []
+    for index, row in tweets.iterrows():
+        d = row.to_dict()
+        d['update_time'] = d['update_time'].isoformat()
+        list_to_return.append(d)
+    return jsonify({'tweets': list_to_return})
 
 
 if __name__ == "__main__":
