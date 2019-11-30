@@ -95,10 +95,10 @@ def get_labelled_tweets():
 def get_stats_heatmap():
     flights = read_all_tweets()
     flights = pd.pivot_table(flights, values='tweet_id', index=['label'],  columns=['username'], aggfunc=len)
-    fig, ax = plt.subplots(figsize=(6, 3))
+    fig, ax = plt.subplots(figsize=(12, 3))
     sns.heatmap(flights, annot=True, fmt=".0f")
     fig.savefig('output.png')
-    return send_file("output.png", mimetype='image/gif')
+    return send_file("output.png", mimetype='image/gif', cache_timeout=0)
 
 
 if __name__ == "__main__":
