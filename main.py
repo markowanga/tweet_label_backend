@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory
 import pandas as pd
 from random import shuffle
 from flask_cors import CORS, cross_origin
@@ -99,6 +99,11 @@ def get_stats_heatmap():
     sns.heatmap(flights, annot=True, fmt=".0f")
     fig.savefig('output.png')
     return send_file("output.png", mimetype='image/gif', cache_timeout=0)
+
+
+@app.route('/get_result_file', methods=['GET'])
+def download():
+    return send_from_directory(directory="data", filename="data.json")
 
 
 if __name__ == "__main__":
