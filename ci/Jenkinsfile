@@ -16,7 +16,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh "mv main.py ci/"
+                sh "mv *.py ci/"
                 sshPublisher(
                         continueOnError: false,
                         failOnError: true,
