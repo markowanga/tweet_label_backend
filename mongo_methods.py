@@ -49,7 +49,9 @@ def get_labelled_tweets():
 
 
 def get_df_with_all():
-    return pd.DataFrame(get_all_tweets())
+    df = pd.DataFrame(get_all_tweets())
+    df = df.drop(['_id'], axis=1)
+    return df
 
 
 def insert_all_tweets(tweets):

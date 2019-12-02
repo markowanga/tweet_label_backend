@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify, send_file, send_from_directory
 import pandas as pd
-from random import shuffle
 from flask_cors import CORS, cross_origin
-import datetime
 import seaborn as sns
 import matplotlib.pyplot as plt
 import mongo_methods as mm
@@ -10,16 +8,6 @@ import mongo_methods as mm
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app)
-
-# TWEETS_FILE = "data/data.json"
-
-
-# def read_all_tweets():
-#     return pd.read_json(TWEETS_FILE)
-
-
-# def update_all_tweets(df):
-#     df.to_json(TWEETS_FILE)
 
 
 def group_by_counts(df):
@@ -100,9 +88,10 @@ def get_stats_heatmap():
     return send_file("output.png", mimetype='image/gif', cache_timeout=0)
 
 
-# @app.route('/get_result_file', methods=['GET'])
-# def download():
-#     return send_from_directory(directory="data", filename="data.json")
+@app.route('/get_all_results', methods=['GET'])
+def download():
+    mm.get_df_with_all().to_json('results.json')
+    return send_from_directory(directory='', filename="results.json")
 
 
 if __name__ == "__main__":
