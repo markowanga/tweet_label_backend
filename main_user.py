@@ -22,7 +22,7 @@ def group_by_counts(df):
 @app.route("/get_unlabelled_tweet", methods=['GET'])
 @cross_origin()
 def get_unlabelled_tweet():
-    username = request.form['username']
+    username = request.args.get('username')
     tweet = mmu.get_random_not_labelled_tweet_by_username(username)
     return jsonify({
         'id': tweet['tweet_id'],
