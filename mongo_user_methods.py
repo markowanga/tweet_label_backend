@@ -44,7 +44,7 @@ def save_label_for_user(tweet_id, label, username, note):
             'update_time': datetime.datetime.now()
         }
     }
-    abortion_collection.update_one(query_from_tweet_id_and_username(tweet_id, username), new_values)
+    abortion_collection.update(query_from_tweet_id_and_username(tweet_id, username), new_values)
     return
 
 

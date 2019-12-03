@@ -25,7 +25,7 @@ def get_unlabelled_tweet():
     username = request.args.get('username')
     tweet = mmu.get_random_not_labelled_tweet_by_username(username)
     return jsonify({
-        'id': tweet['tweet_id'],
+        'id': str(tweet['tweet_id']),
         'tweet': tweet['tweet_content']
     })
 
@@ -45,9 +45,10 @@ def save_label():
 @app.route("/stats", methods=['GET'])
 @cross_origin()
 def get_stats():
-    tweets = mmu.get_df_with_all()
-    all_tweets_count = tweets.shape[0]
-    labelled_tweets_count = tweets[tweets.apply(lambda x: x.label != '', axis=1)].shape[0]
+    username = request.args.get('username')
+    tweets = mmu.get_all_tweets_by_user(username)
+    all_tweets_count = len(tweets)
+    labelled_tweets_count = len([it for it in tweets if it['label'] != ''])
     return jsonify({
         'all_tweets_count': all_tweets_count,
         'labelled_tweets_count': labelled_tweets_count
