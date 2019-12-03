@@ -59,16 +59,21 @@ def get_df_with_all():
 
 
 def insert_tweets_for_all_user(tweets):
-    tweets_to_insert = [
-        {
-            'tweet_id': it['tweet_id'],
-            'tweet_content': it['tweet_content'],
-            'hashtags': it['hashtags'],
-            'label': it['label'],
-            'insert_time': datetime.datetime.now(),
-            'update_time': it['update_time']
-        }
-        for it in tweets
-    ]
-    abortion_collection.insert_many(tweets_to_insert)
+    get_df_with_all().to_json(datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S") + '.json')
+    abortion_collection.delete_many({})
+    for username in ALL_USERS:
+        tweets_to_insert = [
+            {
+                'tweet_id': it['tweet_id'],
+                'tweet_content': it['tweet_content'],
+                'hashtags': it['hashtags'],
+                'label': it['label'],
+                'insert_time': datetime.datetime.now(),
+                'update_time': it['update_time'],
+                'username': username
+            }
+            for it in tweets
+        ]
+        abortion_collection.insert_many(tweets_to_insert)
+
     return

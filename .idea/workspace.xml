@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6dffc872-1c7e-4067-b319-915383faa2b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main_user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mongo_user_methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongo_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/mongo_methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongo_user_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/mongo_user_methods.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,15 +50,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/ci" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ci" />
       <recent name="$PROJECT_DIR$/data" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/ci" />
     </key>
   </component>
   <component name="RunManager">
@@ -127,7 +125,8 @@
       <workItem from="1575309835961" duration="1383000" />
       <workItem from="1575361403718" duration="2000" />
       <workItem from="1575408158723" duration="94000" />
-      <workItem from="1575408319281" duration="1274000" />
+      <workItem from="1575408319281" duration="1691000" />
+      <workItem from="1575410290799" duration="248000" />
     </task>
     <servers />
   </component>
