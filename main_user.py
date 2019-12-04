@@ -4,6 +4,7 @@ from flask_cors import CORS, cross_origin
 import seaborn as sns
 import matplotlib.pyplot as plt
 import mongo_user_methods as mmu
+import stats_generator
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -45,6 +46,9 @@ def save_label():
 @app.route("/stats", methods=['GET'])
 @cross_origin()
 def get_stats():
+    lines = stats_generator.generate_text_with_report_by_tweets(mmu.get_df_with_all())
+    for it in lines:
+        print(it)
     username = request.args.get('username')
     tweets = mmu.get_all_tweets_by_user(username)
     all_tweets_count = len(tweets)
@@ -83,7 +87,7 @@ def get_labelled_tweets():
 @cross_origin()
 def get_stats_heatmap():
     flights = mmu.get_df_with_all()
-    flights = pd.pivot_table(flights, values='tweet_id', index=['label'],  columns=['username'], aggfunc=len)
+    flights = pd.pivot_table(flights, values='tweet_id', index=['label'], columns=['username'], aggfunc=len)
     fig, ax = plt.subplots(figsize=(12, 3))
     sns.heatmap(flights, annot=True, fmt=".0f")
     fig.savefig('output.png')
@@ -94,6 +98,15 @@ def get_stats_heatmap():
 def download():
     mmu.get_df_with_all().to_json('results.json')
     return send_from_directory(directory='', filename="results.json")
+
+
+@app.route('/tweet_labels_file', methods=['GET'])
+def download_tweet_labels_file():
+    lines = stats_generator.generate_text_with_report_by_tweets(mmu.get_df_with_all())
+    with open('labels.txt', 'w') as the_file:
+        for line in lines:
+            the_file.write(line + '\n')
+    return send_from_directory(directory='', filename="labels.txt")
 
 
 if __name__ == "__main__":
