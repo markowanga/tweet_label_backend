@@ -16,7 +16,7 @@ def generate_text_with_report_by_tweets(tweets_label_df: pd.DataFrame):
         add_line('')
         add_line('#' + str(tweet_id_index + 1))
         add_line('tweet_id: ' + tweet_id)
-        add_line('inserted_time: ' + selected_tweets['inserted_time'].to_numpy()[0])
+        add_line('inserted_time: ' + selected_tweets['insert_time'].to_numpy()[0])
         add_line('')
         add_line('tweet_content: ')
         add_line(selected_tweets['tweet_content'].to_numpy()[0])
