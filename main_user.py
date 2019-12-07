@@ -46,9 +46,6 @@ def save_label():
 @app.route("/stats", methods=['GET'])
 @cross_origin()
 def get_stats():
-    lines = stats_generator.generate_text_with_report_by_tweets(mmu.get_df_with_all())
-    for it in lines:
-        print(it)
     username = request.args.get('username')
     tweets = mmu.get_all_tweets_by_user(username)
     all_tweets_count = len(tweets)
@@ -102,7 +99,7 @@ def download():
 
 @app.route('/tweet_labels_file', methods=['GET'])
 def download_tweet_labels_file():
-    lines = stats_generator.generate_text_with_report_by_tweets(mmu.get_df_with_all())
+    lines = stats_generator.generate_text_with_report_by_tweets(mmu.get_df_with_all().sort_values('insert_time'))
     with open('labels.txt', 'w') as the_file:
         for line in lines:
             the_file.write(line + '\n')

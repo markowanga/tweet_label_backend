@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6dffc872-1c7e-4067-b319-915383faa2b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ci/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/ci/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/stats_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongo_user_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/mongo_user_methods.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +151,7 @@
       <workItem from="1575408319281" duration="1691000" />
       <workItem from="1575410290799" duration="5081000" />
       <workItem from="1575488794001" duration="3916000" />
+      <workItem from="1575580879117" duration="1695000" />
     </task>
     <servers />
   </component>
