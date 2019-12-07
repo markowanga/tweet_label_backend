@@ -8,7 +8,7 @@ def generate_text_with_report_by_tweets(tweets_label_df: pd.DataFrame):
     def add_line(line):
         final_string_list.append(line)
 
-    tweet_id_list = list(tweets_label_df['tweet_id'].to_numpy())
+    tweet_id_list = list(set(list(tweets_label_df.sort_values('insert_time', ascending=True).tail(400)['tweet_id'].to_numpy())))
     for tweet_id_index in range(len(tweet_id_list)):
         tweet_id = tweet_id_list[tweet_id_index]
         selected_tweets = tweets_label_df[tweets_label_df['tweet_id'] == tweet_id]
