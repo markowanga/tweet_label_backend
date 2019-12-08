@@ -24,7 +24,8 @@ def group_by_counts(df):
 @cross_origin()
 def get_unlabelled_tweet():
     username = request.args.get('username')
-    tweet = mmu.get_random_not_labelled_tweet_by_username(username)
+    labelling_tag = request.args.get('labelling_tag')
+    tweet = mmu.get_random_not_labelled_tweet_by_username(username, labelling_tag)
     return jsonify({
         'id': str(tweet['tweet_id']),
         'tweet': tweet['tweet_content']
@@ -39,7 +40,19 @@ def save_label():
     label = request_body['label']
     username = request_body['username']
     note = request_body['note']
-    mmu.save_label_for_user(tweet_id, label, username, note)
+    labelling_tag = request_body['labelling_tag']
+    mmu.save_label_for_user(tweet_id, label, username, note, labelling_tag)
+    return '', 204
+
+
+@app.route("/send_to_experts", methods=['PUT'])
+@cross_origin()
+def send_to_experts():
+    request_body = request.get_json()
+    tweet_id = request_body['tweet_id']
+    username = request_body['username']
+    labelling_tag = request_body['labelling_tag']
+    mmu.mark_as_super_difficult_tweet(tweet_id, username, labelling_tag)
     return '', 204
 
 
@@ -47,7 +60,8 @@ def save_label():
 @cross_origin()
 def get_stats():
     username = request.args.get('username')
-    tweets = mmu.get_all_tweets_by_user(username)
+    labelling_tag = request.args.get('labelling_tag')
+    tweets = mmu.get_username_tag_tweets(username, labelling_tag)
     all_tweets_count = len(tweets)
     labelled_tweets_count = len([it for it in tweets if it['label'] != ''])
     return jsonify({
